@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@aplisay/react-widget@^0.1.2":
-  version "0.1.2"
-  resolved "https://registry.yarnpkg.com/@aplisay/react-widget/-/react-widget-0.1.2.tgz#f45bd8485b52cf68243a448e21b8af7868419d48"
-  integrity sha512-TzwjZ5wkf1NnlkaMbmOafaSGF6CFJ+E1RsCBtNBbUX45UAuhH5/pijKaHilpEx49QHW90UMj73Z2CJxeLkahfQ==
+"@aplisay/react-widget@^0.1.3":
+  version "0.1.3"
+  resolved "https://registry.yarnpkg.com/@aplisay/react-widget/-/react-widget-0.1.3.tgz#28408012fff86690d5e5e5a34e63b0cf1ad07789"
+  integrity sha512-xdFj6iUKt87qqBXbU1hKumO0MIc71X8LTruqWDH4DcylDUo3gK1OoYFXV4UaNh1B5f0g/ZeQoTctc+W96i8S1A==
   dependencies:
     livekit-client "^2.7.5"
     ultravox-client "^0.3.4"
@@ -2164,6 +2164,11 @@ react-is@^16.13.1:
   version "16.13.1"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
+
+react-swipeable@^7.0.2:
+  version "7.0.2"
+  resolved "https://registry.yarnpkg.com/react-swipeable/-/react-swipeable-7.0.2.tgz#ef8858096a47144ba7060675af1cd672e00ecc12"
+  integrity sha512-v1Qx1l+aC2fdxKa9aKJiaU/ZxmJ5o98RMoFwUqAAzVWUcxgfHFXDDruCKXhw6zIYXm6V64JiHgP9f6mlME5l8w==
 
 react@^19.0.0:
   version "19.0.0"

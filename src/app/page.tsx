@@ -1,9 +1,10 @@
 'use client'
+import { useSwipeable } from 'react-swipeable';
 import AplisayWidget from '@aplisay/react-widget';
 import '@aplisay/react-widget/dist/styles.css';
-import { useState, useEffect, useCallback } from 'react';
-import getSlides from '../lib/dl.js';
-
+import { useState, useEffect } from 'react';
+import { SlideType } from '../types';
+import staticSlides from '../slides';
 const url = process.env.NEXT_PUBLIC_APLISAY_URL;
 const roomKey = process.env.NEXT_PUBLIC_APLISAY_KEY;
 const listenerId = process.env.NEXT_PUBLIC_APLISAY_AGENT;
@@ -11,13 +12,22 @@ const listenerId = process.env.NEXT_PUBLIC_APLISAY_AGENT;
 const ImageSlider: React.FC = () => {
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
   const [open, setOpen] = useState(false);
-  const [slides, setSlides] = useState([]);
-  const [numSlides, setNumSlides] = useState(0)
+  const [slides, setSlides] = useState<SlideType[] | null>(null);
+  const [numSlides, setNumSlides] = useState(0);
+  const [fullScreen, setFullScreen] = useState(false);
 
-
+  const handlers = useSwipeable({
+    onSwipedLeft: nextSlide,
+    onSwipedRight: lastSlide,
+    onTap: () => {
+      console.log('tap');
+      nextSlide();
+    },
+    trackMouse: true,
+  });
 
   useEffect(() => {
-    function keyDown(event) {
+    function keyDown(event: { key: string }) {
       console.log(event.key, 'key');
       if (event.key === 'ArrowRight' || event.key === 'PageDown' || event.key === 'Enter') {
         nextSlide();
@@ -25,20 +35,16 @@ const ImageSlider: React.FC = () => {
         lastSlide();
       }
     }
-
     document.addEventListener('keydown', keyDown);
     return () =>
       document.removeEventListener('keydown', keyDown);
-  }, [numSlides]);
+  }, [numSlides, nextSlide, lastSlide]);
 
 
   useEffect(() => {
-    getSlides().then((s) => {
-      setSlides(s);
-      setNumSlides(s?.length);
-      console.log('num slides', s?.length);
-    });
-
+    setSlides(staticSlides);
+    setNumSlides(staticSlides.length);
+    console.log({ slides });
   }, []);
 
   useEffect(() => {
@@ -49,12 +55,10 @@ const ImageSlider: React.FC = () => {
 
   const get_current_slide = () => {
     current_slide = currentSlideIndex;
-    return JSON.stringify(slides[currentSlideIndex]);
+    return slides && JSON.stringify(slides[currentSlideIndex]);
   };
 
-
-
-  const lastSlide = () => {
+  function lastSlide() {
     setCurrentSlideIndex((prevIndex) => Math.max((prevIndex - 1), 0));
   };
 
@@ -65,29 +69,38 @@ const ImageSlider: React.FC = () => {
       console.log({ prevIndex, newIndex, length: numSlides });
       return newIndex;
     });
-    return Math.min((currentSlideIndex + 1), numSlides - 1)
   };
-
-  const get_next_slide = useCallback(() => {
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+  const get_next_slide = () => {
     current_slide = Math.min((current_slide + 1), numSlides - 1);
     setCurrentSlideIndex(current_slide);
     console.log({ current_slide, numSlides }, 'next slide');
-    return JSON.stringify(slides[current_slide]);
-  }, [currentSlideIndex, numSlides, slides, nextSlide]);
+    return JSON.stringify(slides?.[current_slide]);
+  };
 
-  console.log({ slide: slides[currentSlideIndex] }, 'slide render');
+  useEffect(() => {
+    if (fullScreen) {
+      document.documentElement.requestFullscreen();
+    } else {
+      if(document.fullscreenElement !== null)
+       document?.exitFullscreen();
+    }
+  }, [fullScreen]);
+
+  console.log({ slide: slides && slides[currentSlideIndex] }, 'slide render');
 
   return (
     <>
-
-      <img src={`/images/image${parseInt(currentSlideIndex)+1}.png`} alt="Slider image"
-        style={{
-          width: '100vw',
-          height: '100%',
-          objectFit: 'cover'
-        }}
-      />
+      <div {...handlers}>
+        <img
+          src={`/images/image${currentSlideIndex + 1}.png`}
+          alt="Slider image"
+          style={{
+            width: '100vw',
+            height: '100%',
+            objectFit: 'cover'
+          }}
+        />
+      </div>
       <div style={{
         width: '20vw',
         position: 'absolute',
@@ -124,9 +137,55 @@ const ImageSlider: React.FC = () => {
         left: '10px',
         backgroundColor: 'transparent'
       }}>
-        {currentSlideIndex +1}/{numSlides}
-        <button onClick={() => setOpen(true)}>Hand over to Emily</button>
+        {currentSlideIndex + 1}/{numSlides}
       </div>
+      {!open && <button
+        onClick={() => setOpen(true)}
+        style={{
+          padding: '10px',
+          fontSize: '16px',
+          color: '#fff',
+          backgroundColor: '#4a90e2',
+          border: 'none',
+          borderRadius: '5px',
+          cursor: 'pointer',
+          position: 'absolute',
+          bottom: '10px',
+          right: '10px',
+        }}
+      >
+        Start Presenting Please Emily!
+      </button>}
+      <button
+        onClick={() => setFullScreen((oldState) => !oldState)}
+        style={{
+          position: 'absolute',
+          top: '10px',
+          right: '10px',
+          backgroundColor: 'transparent',
+          border: 'none',
+          cursor: 'pointer'
+        }}
+      >
+        {!fullScreen ?
+          <svg width="25px" height="25px" viewBox="0 0 24 24" fill="#dddddd" xmlns="http://www.w3.org/2000/svg">
+            <path
+              fillRule="evenodd"
+              clipRule="evenodd"
+              d="M18 4.654v.291a10 10 0 0 0-1.763 1.404l-2.944 2.944a1 1 0 0 0 1.414 1.414l2.933-2.932A9.995 9.995 0 0 0 19.05 6h.296l-.09.39A9.998 9.998 0 0 0 19 8.64v.857a1 1 0 1 0 2 0V4.503a1.5 1.5 0 0 0-1.5-1.5L14.5 3a1 1 0 1 0 0 2h.861a10 10 0 0 0 2.249-.256l.39-.09zM4.95 18a10 10 0 0 1 1.41-1.775l2.933-2.932a1 1 0 0 1 1.414 1.414l-2.944 2.944A9.998 9.998 0 0 1 6 19.055v.291l.39-.09A9.998 9.998 0 0 1 8.64 19H9.5a1 1 0 1 1 0 2l-5-.003a1.5 1.5 0 0 1-1.5-1.5V14.5a1 1 0 1 1 2 0v.861a10 10 0 0 1-.256 2.249l-.09.39h.295z" />
+          </svg>
+          :
+          <svg width="25px" height="25px" viewBox="0 0 24 24" fill="#dddddd" xmlns="http://www.w3.org/2000/svg">
+            <path d="M21.7071 3.70711L16.4142 9H20C20.5523 9 21 9.44772 21 10C21 10.5523 20.5523 11 20 11H14.0007L13.997 11C13.743 10.9992 13.4892 10.9023 13.295 10.7092L13.2908 10.705C13.196 10.6096 13.1243 10.4999 13.0759 10.3828C13.0273 10.2657 13.0004 10.1375 13 10.003L13 10V4C13 3.44772 13.4477 3 14 3C14.5523 3 15 3.44772 15 4V7.58579L20.2929 2.29289C20.6834 1.90237 21.3166 1.90237 21.7071 2.29289C22.0976 2.68342 22.0976 3.31658 21.7071 3.70711Z"
+              />
+            <path d="M9 20C9 20.5523 9.44772 21 10 21C10.5523 21 11 20.5523 11 20V14.0007C11 13.9997 11 13.998 11 13.997C10.9992 13.7231 10.8883 13.4752 10.7092 13.295C10.7078 13.2936 10.7064 13.2922 10.705 13.2908C10.6096 13.196 10.4999 13.1243 10.3828 13.0759C10.2657 13.0273 10.1375 13.0004 10.003 13C10.002 13 10.001 13 10 13H4C3.44772 13 3 13.4477 3 14C3 14.5523 3.44772 15 4 15H7.58579L2.29289 20.2929C1.90237 20.6834 1.90237 21.3166 2.29289 21.7071C2.68342 22.0976 3.31658 22.0976 3.70711 21.7071L9 16.4142V20Z"
+             />
+          </svg>
+        }
+
+      </button>
+
+
     </>
   );
 };

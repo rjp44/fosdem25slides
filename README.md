@@ -1,6 +1,23 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is a super simple [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) which presents Rob's slides about Aplisay from FOSDEM 25.
+
+If you just want to see the slides, then go to [the hosted slides](https://fosdem25.aplisay.com)
 
 ## Getting Started
+
+If you are still reading then you probably want to know how this works, or maybe fork it to do something similar yourself.
+
+### Prerequisites
+
+You will need to [create an agent on the Aplisay environment](https://aplisay.com/resources/using-the-cli-to-run-persistent-agents), those instructions assume a React app. Fot this NextJs app, use a `NEXT_PUBLIC` prefix instead of `REACT_APP`. Use the agent file in `agents`, or make a different one.
+
+### Install the deps
+
+*eg*
+```
+yarn install
+```
+
+### Run the app
 
 First, run the development server:
 
@@ -16,21 +33,14 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Customising the slides
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+In its original incarnation, this app pulled the presentation dynamically from Google slides. 
+To release it here without needing API credential files, we transformed this to a static initialisation of the slides from a file in the project. 
+The slides are stored in `src/slides.ts` and are loaded at build time. You can edit them there, or add new ones.
+
+If you have a Google API account and want to add back in the functionality to pull dynamically from there, we have left the downloader in `lib/dl.js` although it isn't currently used.
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+To find out a bit more about how we use the [Aplisay Widget](https://widget.aplisay.com/), see the [resources](https://aplisay.com/blog) on the [Aplisay website](https://aplisay.com/).
