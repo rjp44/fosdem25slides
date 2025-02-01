@@ -45,8 +45,8 @@ const ImageSlider: React.FC = () => {
     console.log({ slides, currentSlideIndex }, 'slides');
   }, [slides, currentSlideIndex, numSlides]);
 
-  let current_slide;
-  
+  let current_slide = 0;
+
   const get_current_slide = () => {
     current_slide = currentSlideIndex;
     return JSON.stringify(slides[currentSlideIndex]);
@@ -69,19 +69,22 @@ const ImageSlider: React.FC = () => {
   };
 
   const get_next_slide = useCallback(() => {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     current_slide = Math.min((current_slide + 1), numSlides - 1);
     setCurrentSlideIndex(current_slide);
     console.log({ current_slide, numSlides }, 'next slide');
     return JSON.stringify(slides[current_slide]);
   }, [currentSlideIndex, numSlides, slides, nextSlide]);
 
+  console.log({ slide: slides[currentSlideIndex] }, 'slide render');
+
   return (
     <>
 
-      <img src={slides[currentSlideIndex]?.Iimage} alt="Slider image"
+      <img src={`/images/image${parseInt(currentSlideIndex)+1}.png`} alt="Slider image"
         style={{
-          width: '100%',
-          height: '100vh',
+          width: '100vw',
+          height: '100%',
           objectFit: 'cover'
         }}
       />
