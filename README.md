@@ -1,6 +1,10 @@
-This is a super simple [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) which presents Rob's slides about Aplisay from FOSDEM 25.
+# FOSDEM 25 Slides
 
-If you just want to see the slides, then go to [the hosted slides](https://fosdem25.aplisay.com)
+This is a super simple [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app) which presents Rob's slides about realtime conversational agents from FOSDEM 25.
+
+If you just want to see the interactive slides, then go to [the hosted slides](https://fosdem25.aplisay.com).
+
+More interested in experimenting with your own realtime agents? then [read more about Aplisay](https://aplisay.com,) or just try some stuff out in the [Aplisay playground](https://playground.aplisay.com).
 
 ## Getting Started
 
@@ -12,8 +16,7 @@ You will need to [create an agent on the Aplisay environment](https://aplisay.co
 
 ### Install the deps
 
-*eg*
-```
+```bash
 yarn install
 ```
 
@@ -35,8 +38,8 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 ### Customising the slides
 
-In its original incarnation, this app pulled the presentation dynamically from Google slides. 
-To release it here without needing API credential files, we transformed this to a static initialisation of the slides from a file in the project. 
+In its original incarnation, this app pulled the presentation dynamically from Google slides.
+To release it here without needing API credential files, we transformed this to a static initialisation of the slides from a file in the project.
 The slides are stored in `src/slides.ts` and are loaded at build time. You can edit them there, or add new ones.
 
 If you have a Google API account and want to add back in the functionality to pull dynamically from there, we have left the downloader in `lib/dl.js` although it isn't currently used.

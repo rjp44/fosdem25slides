@@ -14,7 +14,7 @@ const slides: SlideType[] = [
     "image": "https://lh7-us.googleusercontent.com/docsdf/AFQj2d5mWG9wEHELqSQYWyBVUBtF0gYoBtuNaoOs7katqPA6HAzWvqG0mqeqQpbMVFulgM9SiY-XeF7Bc4NI3A9Jo2oHBEhfomU9yp8DJJcg-bjhJZMr-SHYafO9W5YmhamXq6qghmVIvs7_5QWT9_RFLsoTYlTbmgz5VbyLSjNJGzmr=s1600"
   },
   {
-    "notes": "We developed an orchestration framework for LLMs that was agostic about the speech to text, LLM provider, and text to speech engine. It worked well and allowed us to experiment and plug in/out different LLMs and voice interfaces. Latency and poor interruption handling inherent in the pipeline approach and first gen speech to text and text to speech and the like made it a very poor, walkie talkie like experience. Still useful for some applications where it was creating lots of value, but nowhere near human level voice.\n",
+    "notes": "We developed an orchestration framework for LLMs that was agnostic about the speech to text, LLM provider, and text to speech engine. It worked well and allowed us to experiment and plug in/out different LLMs and voice interfaces. Latency and poor interruption handling inherent in the pipeline approach and first gen speech to text and text to speech and the like made it a very poor, walkie talkie like experience. Still useful for some applications where it was creating lots of value, but nowhere near human level voice.\n",
     "image": "https://lh7-us.googleusercontent.com/docsdf/AFQj2d6WBTIy5EwCFY_MRypdRJWhgckNcjNHgbGW-6yBCMdb8BQel18erVqwZ5usH4H7igLwEu_xHUcORAc05fakIPry6etxtFBaJReB6TvJ0_tO9s09GxLoPaRIztZ-SchaEs_tUkTl4do3YplH5abmANOYTluWpukNZ1L_73RJWGzx9T8=s1600"
   },
   {
@@ -30,7 +30,7 @@ const slides: SlideType[] = [
     "image": "https://lh7-us.googleusercontent.com/docsdf/AFQj2d5sHmjVjpWpLBUOCECbcJhhjwymdi75m0G3xoelpKofzWq7sZKH6PaNzVTv3nNE9BCfHwrrP7FVa1rK_C4E71JBAOSSU-bltW2tTdDtF12MMY8GT2VaRmJnUoEXVJ1y9pd4TBG3-QLBeAM3eWuDcBOaAKQ0_gPBNYBP90uo7gh5=s1600"
   },
   {
-    "notes": "We quickly re-oriented our architecture around consuming real time models, and sadly that meant that Jambonz went from being the primary orchestration pipeline, to just one of the available pipelines, but that did mean we could start presenting WebRTC, as well as telephony interfaces, and also do some quite interesting client side browser interactions.\n",
+    "notes": "We quickly re-oriented our architecture around consuming real time models, and sadly that meant that Jambonz went from being the primary orchestration pipeline, to just one of the available pipelines, but that did mean we could start presenting WebRTC, as well as telephony interfaces, and also do some quite interesting client side browser interactions. This is what you are seeing here in this presentation, my voice is a WebRTC session coming from a remote server, but I'm getting my data from, and controlling the NextJS app which is showing these slides onscreen\n",
     "image": "https://lh7-us.googleusercontent.com/docsdf/AFQj2d7kq2yK1OZdwrpb-CS5RfKtyRRMF2iykrtfw6KDWe2VgzBGymgtaJwZYyIhr_2aj8kDGB6L8Y-1n_JHzCFg8LPhKyu050hmt7n-yB6xH6Z5JApOAJzkAU-oKMb8YrjPP_JO2I7EyFpv4Y6-sIDuSB2oiE7V8OVuhoTePF7mrNRN9GE=s1600"
   },
   {
@@ -50,7 +50,7 @@ const slides: SlideType[] = [
     "image": "https://lh7-us.googleusercontent.com/docsdf/AFQj2d6VlB1pKQCtTlq7EoeUy626OOjH90wgAnS9x8JA62vNj21Wob4qIdf6VRpeNs2F5SOLwmnkm41KBZKVnBwhZrQcvJVfpuGZwZ5QLEQodaCDColGDRwNxnKMovCL0ir6Vr4i6TlUtOUA1AH-zRv6KA0cf4EmlBFAH3bZoYY1ECKYF_c=s1600"
   },
   {
-    "notes": "Anyway, that is the end of our very short presentation. You can find more information at aplisay.com, or on our Aplisay github where you will find the source to this presentation and everything we have talked about today. If you need to know more talk to rob on matrix or rob@pickering.org.\n",
+    "notes": "Anyway, that is the end of our very short presentation. You can find more information at aplisay.com or on our Aplisay github where you will find the source to this presentation and everything we have talked about today. If you need to know more talk to rob on matrix or rob@pickering.org.\n",
     "last_slide": true,
     "image": "https://lh7-us.googleusercontent.com/docsdf/AFQj2d6zbHCemnMYskuDdRR6ByOSY10QgCPrGCXZKf8goJw2rD0pho0CpKa6FPtoJCuFV8jAWjOGfe5CMuZ2KilWg-d4H0EjUQ51ee6paz20GSD3xuU0Rlo7l4GkQgUKl_lLPL4cdJ9a2LjmghW3X_vqBcbMb6Sg7Ms4DNGtaQAFU1rluow=s1600"
   }
