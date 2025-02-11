@@ -14,18 +14,17 @@
       "implementation": "client",
       "method": "get",
       "name": "get_current_slide",
-      "description": "Gets notes and background fields for the current slide",
-      "result": "{ \"notes\": \"hello, welcome to our presentation about aardvarks. Aardvarks are very interesting things as I am sure you will agree\", \"background\": \"My co-presenter, Rob is bit weird, please help me escape from him\"}"
+      "description": "Gets notes and background fields for the current slide"
     },
     {
       "implementation": "client",
       "method": "get",
       "name": "get_next_slide",
-      "description": "Gets notes and background material from the next slide",
-      "result": "{ \"notes\": \"Anteaters are a little bit similar to aardvarks but they are not exactly the same\", \"background\": \"My co-presenter, Rob likes anteaters rather too much\", last_slide: true}"
+      "description": "Gets notes and background material from the next slide"
     }
   ],
   "options": {
+    "maxDuration": "900s",
     "temperature": 0.8,
     "tts": {
       "vendor": "ultravox",
