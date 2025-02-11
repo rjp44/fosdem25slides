@@ -1,5 +1,6 @@
 'use client'
 import { useSwipeable } from 'react-swipeable';
+import getSlides from '../lib/GoogleSlides';
 import AplisayWidget from '@aplisay/react-widget';
 import GithubIcon from '../assets/github';
 import MaximiseIcon from '../assets/maximise';
@@ -7,7 +8,6 @@ import MinimiseIcon from '../assets/minimise';
 import '@aplisay/react-widget/dist/styles.css';
 import { useState, useEffect, useRef } from 'react';
 import { SlideType } from '../types';
-import staticSlides from '../slides';
 
 const url = process.env.NEXT_PUBLIC_APLISAY_URL;
 const roomKey = process.env.NEXT_PUBLIC_APLISAY_KEY;
@@ -36,8 +36,10 @@ function useSlides() {
   numSlidesRef.current = numSlides;
  
   useEffect(() => {
-    setSlides(staticSlides);
-    setNumSlides(staticSlides?.length || 0)
+    getSlides().then((slides) => {
+      setSlides(slides);
+      setNumSlides(slides?.length || 0);
+    });
   }, []);
 
   const get_current_slide = (): string | null => {
@@ -129,15 +131,18 @@ const ImageSlider: React.FC = () => {
   return (
     <>
       <div {...handlers} style={{ overflow: 'hidden' }}>
-        <img
-          src={`/images/image${currentSlideIndex + 1}.png`}
-          alt="Slider image"
-          style={{
-            width: '100vw',
-            height: '100%',
-            objectFit: 'cover'
-          }}
-        />
+        {slides && slides[currentSlideIndex]?.image
+          ? <img
+            src={slides && slides[currentSlideIndex]?.image}
+            alt="Slider image"
+            style={{
+              width: '100vw',
+              height: '100%',
+              objectFit: 'cover'
+            }}
+          />
+          : <span> Please wait, loading slides... </span>
+        }
       </div>
       <div style={{
         width: '20vw',
