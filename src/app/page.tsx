@@ -128,7 +128,7 @@ const ImageSlider: React.FC = () => {
 
   return (
     <>
-      <div {...handlers}>
+      <div {...handlers} style={{ overflow: 'hidden' }}>
         <img
           src={`/images/image${currentSlideIndex + 1}.png`}
           alt="Slider image"
@@ -142,8 +142,8 @@ const ImageSlider: React.FC = () => {
       <div style={{
         width: '20vw',
         position: 'absolute',
-        top: '10px',
-        right: '10px',
+        top: 0,
+        right: 0,
         height: '100vh',
         backgroundColor: 'transparent'
       }}>
