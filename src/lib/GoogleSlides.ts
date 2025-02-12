@@ -49,7 +49,7 @@ async function getPresentation() {
   } =
     (await slideApi.presentations.get({
       presentationId: presentationId,
-    })) || {};
+    })) || { data: { slides: [] } };
 
   const results = await Promise.all(
     slides?.map(
@@ -85,8 +85,9 @@ async function getPresentation() {
         return undefined;
       }
     ) || []
-  );
-  return results.filter(
-    (result): result is SlideType => result !== undefined
-  ) as SlideType[];
+  )
+  if (results && results.length > 0) {
+    results[results.length - 1].last_slide = true;
+  }
+  return results.filter((result): result is SlideType => result !== undefined)
 }
