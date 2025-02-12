@@ -12,7 +12,7 @@ If you are still reading then you probably want to know how this works, or maybe
 
 ### Prerequisites
 
-You will need to [create an agent on the Aplisay environment](https://aplisay.com/resources/using-the-cli-to-run-persistent-agents), those instructions assume a React app. Fot this NextJs app, use a `NEXT_PUBLIC` prefix instead of `REACT_APP`. Use the agent file in `agents`, or make a different one.
+You will need to [create an agent on the Aplisay environment](https://aplisay.com/resources/using-the-cli-to-run-persistent-agents), those instructions assume a React app. For this NextJs app, use a `NEXT_PUBLIC` prefix instead of `REACT_APP`. Use the agent file in `agents`, or make a different one.
 
 ### Install the deps
 
